@@ -1,0 +1,18 @@
+# AWS Region where resources will be deployed
+aws_region         = "<AWS_REGION>"
+
+# Availability Zone for subnets
+availability_zone  = "<AVAILABILITY_ZONE>"
+
+# Global project name for tagging
+project_name       = "<PROJECT_NAME>"
+
+# EC2 instance type
+instance_type      = "<INSTANCE_TYPE>"
+
+# VPC and subnet configuration
+vpc_cidr           = "<VPC_CIDR_BLOCK>"
+public_subnet_cidr = "<PUBLIC_SUBNET_CIDR>"
+
+# Path to your public SSH key on local machine
+public_key_path    = "<PATH_TO_YOUR_PUBLIC_KEY>"
