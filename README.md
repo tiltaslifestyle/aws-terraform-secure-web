@@ -37,7 +37,7 @@ graph TD
 
 ## Features (Planned)
 - [x] Project Initialization: Provider configuration & state setup.
-- [ ] Networking: Custom VPC, Subnets, Internet Gateway.
+- [x] Networking: Custom VPC, Subnets, Internet Gateway.
 - [ ] Security: Granular Security Group rules (SSH/HTTP only).
 - [ ] Compute: Automated EC2 provisioning with bootstrapping scripts.
 - [ ] State Management: S3 Backend for team collaboration.
