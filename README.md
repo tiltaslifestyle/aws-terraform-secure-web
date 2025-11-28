@@ -1,18 +1,15 @@
-# Modular AWS Secure Web Infrastructure with Observability
+# AWS Infrastructure as Code (Terraform + Docker)
 
 ![Terraform](https://img.shields.io/badge/terraform-%235835CC.svg?style=for-the-badge&logo=terraform&logoColor=white)
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
-Production-ready Infrastructure as Code (IaC) project that automates the
-deployment of a secure, modular cloud environment on AWS. It
-demonstrates modern DevOps practices, including modular architecture,
-remote state management, and automated observability stack deployment
-using Docker and Netdata.
+Production-ready Infrastructure as Code (IaC) project deploying a secure, scalable, and modular AWS environment using Terraform.
+The project provisions a custom Virtual Private Cloud (VPC) with strict security rules, hosts a Dockerized web server, and includes an automated observability stack with Netdata.
 
 ![Netdata Dashboard](screenshot.png)
 
-## Architecture Overview & Key Features
+## Architecture Overview 
 
 ```
 User (Browser)
@@ -37,6 +34,7 @@ User (Browser)
    ├── Monitors Host Disks (via /sys volume)
    └── Generates Real-time Dashboard HTML
 ```
+## Key Features
 
 -   **Modular Design:** Infrastructure is split into reusable
     abstractions (`modules/network` and `modules/compute`).
