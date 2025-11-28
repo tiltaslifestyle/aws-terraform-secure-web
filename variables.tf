@@ -27,3 +27,8 @@ variable "instance_type" {
   description = "EC2 instance type"
   type        = string
 }
+
+variable "public_key_path" {
+  description = "Path to the public SSH key file"
+  type        = string
+}

@@ -18,4 +18,7 @@ module "compute" {
   vpc_id        = module.network.vpc_id
   subnet_id     = module.network.public_subnet_id
   instance_type = var.instance_type
+
+  # Read public key material from the specified file
+  public_key_material = file(var.public_key_path)
 }

@@ -51,11 +51,19 @@ resource "aws_security_group" "web_sg" {
   }
 }
 
+# Create Key Pair for SSH access
+resource "aws_key_pair" "deployer" {
+  key_name   = "${var.project_name}-key"
+  public_key = var.public_key_material
+}
+
 # Create EC2 Instance
 resource "aws_instance" "web_server" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
   subnet_id     = var.subnet_id
+
+  key_name = aws_key_pair.deployer.key_name
 
   # Attach security group
   vpc_security_group_ids = [aws_security_group.web_sg.id]

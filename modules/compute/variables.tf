@@ -17,3 +17,8 @@ variable "instance_type" {
   description = "EC2 instance type"
   type        = string
 }
+
+variable "public_key_material" {
+  description = "The public SSH key material (contents of .pub file)"
+  type        = string
+}
