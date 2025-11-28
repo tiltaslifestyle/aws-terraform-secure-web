@@ -68,14 +68,35 @@ resource "aws_instance" "web_server" {
   # Attach security group
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 
-  # User data to install Nginx
+  # User data to install Netdata
   user_data = <<-EOF
               #!/bin/bash
               apt-get update
-              apt-get install -y nginx
-              systemctl start nginx
-              systemctl enable nginx
-              echo "<h1>Deployed via Terraform</h1>" > /var/www/html/index.html
+              apt-get install -y ca-certificates curl gnupg lsb-release
+
+              mkdir -p /etc/apt/keyrings
+              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+              echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+              
+              apt-get update
+              apt-get install -y docker-ce docker-ce-cli containerd.io
+
+              # -p 80:19999 -> 
+              # -v /proc... -> 
+              docker run -d --name=netdata \
+                -p 80:19999 \
+                -v netdataconfig:/etc/netdata \
+                -v netdatalib:/var/lib/netdata \
+                -v netdatacache:/var/cache/netdata \
+                -v /etc/passwd:/host/etc/passwd:ro \
+                -v /etc/group:/host/etc/group:ro \
+                -v /proc:/host/proc:ro \
+                -v /sys:/host/sys:ro \
+                -v /etc/os-release:/host/etc/os-release:ro \
+                --restart unless-stopped \
+                --cap-add SYS_PTRACE \
+                --security-opt apparmor=unconfined \
+                netdata/netdata
               EOF
 
   tags = {
